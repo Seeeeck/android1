@@ -5,10 +5,10 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.13177083333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29782880852923044" />
-        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.18876015770536347" />
+        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main3.xml" value="0.24382716049382716" />
-        <entry key="app/src/main/res/layout/activity_main4.xml" value="0.17604166666666668" />
-        <entry key="app/src/main/res/layout/activity_main5.xml" value="0.12815565259222864" />
+        <entry key="app/src/main/res/layout/activity_main4.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main5.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main6.xml" value="0.1684394087786941" />
       </map>
     </option>

@@ -8,51 +8,51 @@
 
     <EditText
         android:id="@+id/accountId"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
+        android:layout_width="254dp"
+        android:layout_height="62dp"
         android:layout_marginStart="76dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="125dp"
-        android:layout_marginBottom="41dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
+        android:hint="ユーザー名"
         android:inputType="textPersonName"
-        android:text="username"
-        app:layout_constraintBottom_toTopOf="@+id/accountPassword"
+        app:layout_constraintBottom_toTopOf="@+id/accountPassword2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.34"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/accountPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="125dp"
-        android:layout_marginBottom="73dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="password"
-        app:layout_constraintBottom_toTopOf="@+id/loginBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accountId" />
 
     <Button
         android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="134dp"
-        android:layout_marginTop="53dp"
+        android:layout_marginTop="51dp"
         android:layout_marginEnd="189dp"
-        android:layout_marginBottom="407dp"
-        android:text="Login"
+        android:layout_marginBottom="280dp"
+        android:text="ログイン"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accountPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/accountPassword2" />
+
+    <EditText
+        android:id="@+id/accountPassword2"
+        android:layout_width="256dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="61dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="94dp"
+        android:layout_marginBottom="25dp"
+        android:ems="10"
+        android:hint="パスワード"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/loginBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accountId" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

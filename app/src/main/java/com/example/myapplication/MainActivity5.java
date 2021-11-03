@@ -49,7 +49,7 @@ public class MainActivity5 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String accountId = ((EditText) findViewById(R.id.accountId)).getText().toString();
-                String accountPassword = ((EditText) findViewById(R.id.accountPassword)).getText().toString();
+                String accountPassword = ((EditText) findViewById(R.id.accountPassword2)).getText().toString();
 
                 new AsyncTask<Void, Void, Void>(){
 
@@ -122,6 +122,7 @@ public class MainActivity5 extends AppCompatActivity {
                             }catch (Exception e){
                                 Intent intent = new Intent(MainActivity5.this, MainActivity4.class);
                                 intent.putExtra("token",responseData);
+                                intent.putExtra("username",accountId);
                                 startActivity(intent);
                             }
                             System.out.println(responseData);

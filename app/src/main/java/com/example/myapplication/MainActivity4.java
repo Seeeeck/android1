@@ -2,15 +2,25 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -22,6 +32,15 @@ public class MainActivity4 extends AppCompatActivity {
         setContentView(R.layout.activity_main4);
 
         Button apiSend = (Button) findViewById(R.id.button5);
+        String userText = getIntent().getStringExtra("username");
+        AlertDialog.Builder successAlert = new AlertDialog.Builder(MainActivity4.this)
+                .setTitle("送信成功")
+                .setPositiveButton("OK", (dialog, which) -> {
+                });
+        AlertDialog.Builder failAlert = new AlertDialog.Builder(MainActivity4.this)
+                .setTitle("送信失敗")
+                .setPositiveButton("OK", (dialog, which) -> {
+                });
         //ボタンを押下したときの処理を記述
         apiSend.setOnClickListener(new View.OnClickListener(){
 
@@ -34,9 +53,22 @@ public class MainActivity4 extends AppCompatActivity {
                 String q4Text = ((EditText) findViewById(R.id.editTextTextPersonName8)).getText().toString();
                 String q5Text = ((EditText) findViewById(R.id.editTextTextPersonName9)).getText().toString();
                 String q6Text = ((EditText) findViewById(R.id.editTextTextPersonName10)).getText().toString();
-                String ageText = ((EditText) findViewById(R.id.editTextTextPersonName12)).getText().toString();
-                String sexText = ((EditText) findViewById(R.id.editTextTextPersonName13)).getText().toString();
-                String userText = ((EditText) findViewById(R.id.editTextTextPersonName11)).getText().toString();
+                String ageText = ((EditText) findViewById(R.id.editTextTextPersonName13)).getText().toString();
+                RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
+                if (q1Text.equals("")
+                        || q2Text.equals("")
+                        || q3Text.equals("")
+                        || q4Text.equals("")
+                        || q5Text.equals("")
+                        || q6Text.equals("")
+                        || radioGroup.getCheckedRadioButtonId() == -1){
+                    new AlertDialog.Builder(MainActivity4.this)
+                            .setTitle("送信失敗")
+                            .setPositiveButton("OK", (dialog, which) -> {})
+                            .show();
+                    return;
+                }
+                String sexText = radioGroup.getCheckedRadioButtonId() == R.id.male ? "男" : "女";
                 new Thread(() -> {
                    URL url = null;
                    try{
@@ -70,15 +102,26 @@ public class MainActivity4 extends AppCompatActivity {
                        conn.connect();
                        conn.getOutputStream().write(myData);
                        conn.getOutputStream().close();
-                       String code = String.valueOf(conn.getResponseCode());
-                       Log.i("code=", code);
-                       String rs = conn.getResponseMessage();
-                       Log.i("result=", rs);
-                       int code0 = conn.getResponseCode();
-                       if(code0 == 201){
-                           Message message = new Message();
-                           message.obj = 0;
-                       };
+                       InputStream stream = conn.getInputStream();
+                       StringBuilder sb = new StringBuilder();
+                       String line = "";
+                       BufferedReader br = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
+                       while((line = br.readLine()) != null){
+                           sb.append(line);
+                       }
+                       JSONObject jsonObject = new JSONObject(sb.toString());
+                       int code = jsonObject.getInt("code");
+                       if (code == 201){
+                           MainActivity4.this.runOnUiThread(successAlert::show);
+                       }else {
+                           MainActivity4.this.runOnUiThread(() -> {
+                               try {
+                                   failAlert.setMessage(jsonObject.getString("message")).show();
+                               } catch (JSONException e) {
+                                   e.printStackTrace();
+                               }
+                           });
+                       }
                    }catch(Exception e){
                        e.printStackTrace();
                        Log.i("失敗", "");
